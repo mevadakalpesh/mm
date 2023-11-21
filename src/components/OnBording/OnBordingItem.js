@@ -1,7 +1,7 @@
 import { StyleSheet,Text,View,Image} from 'react-native';
 import Animated, {useAnimatedStyle,interpolate,Extrapolate} from 'react-native-reanimated';
 import {useState,useRef,useEffect} from 'react';
-import {COLORS,DIMENSION} from '../../constants/Helper'; 
+import {COLORS,DIMENSION} from '@constants/Helper'; 
 
 const OnBordingItem = ({item, index,x}) => {
   

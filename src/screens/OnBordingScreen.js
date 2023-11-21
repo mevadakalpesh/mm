@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,Text,View,SafeAreaView,FlatList,Image,TouchableOpacity} from 'react-native';
 import Animated, {useSharedValue,useAnimatedScrollHandler,useAnimatedRef,} from 'react-native-reanimated';
-import {COLORS,DIMENSION} from '../constants/Helper'; 
-import OnBordingItem from '../components/OnBording/OnBordingItem';
-import OnBordingPagination from '../components/OnBording/OnBordingPagination';
+import {COLORS,DIMENSION} from '@constants/Helper'; 
+import OnBordingItem from '@components/OnBording/OnBordingItem';
+import OnBordingPagination from '@components/OnBording/OnBordingPagination';
 
 import {useState,useRef} from 'react';
 

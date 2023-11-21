@@ -1,10 +1,10 @@
 import {Text,View} from 'react-native';
+import Input from '@components/form/Input';
 const DashboardScreen = () => {
    return (
      <View>
-      <Text>
-       this is isn
-      </Text>
+        <Text>This is thehs</Text>
+        <Input />
      </View>
     )
 }

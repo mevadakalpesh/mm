@@ -1,8 +1,8 @@
 import { StyleSheet,Text,View,TouchableOpacity} from 'react-native';
 import Animated, {useSharedValue,withSpring,useDerivedValue} from 'react-native-reanimated';
 import {useEffect} from 'react';
-import {COLORS,DIMENSION} from '../../constants/Helper'; 
-import {setItem} from '../../constants/Storage'; 
+import {COLORS,DIMENSION} from '@constants/Helper'; 
+import {setItem} from '@constants/Storage'; 
 import { useNavigation } from '@react-navigation/native';
 
 const OnBordingPagination = ({slidIndex,OnBordingData,changeNextSlider}) => {
@@ -40,14 +40,12 @@ const OnBordingPagination = ({slidIndex,OnBordingData,changeNextSlider}) => {
        }
        </Animated.View>
        <TouchableOpacity style={styles.button} onPress={() => handelButtonPress(slidIndex) }>
-       {
-        (OnBordingData.length - 1) == slidIndex ?
-        <Text style={styles.buttonLabal}>Get Started</Text>
-        :
-        <Text style={styles.buttonLabal}>Next</Text>
-       }
-        
-        
+         {
+          (OnBordingData.length - 1) == slidIndex ?
+          <Text style={styles.buttonLabal}>Get Started</Text>
+          :
+          <Text style={styles.buttonLabal}>Next</Text>
+         }
        </TouchableOpacity>
       </View>
     )
