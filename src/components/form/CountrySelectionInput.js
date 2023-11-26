@@ -2,14 +2,28 @@ import {useState,useEffect,useCallback} from 'react';
 import { StyleSheet, Image, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SelectCountryModal from '@components/form/SelectCountryModal';
+import {useSelector,useDispatch} from 'react-redux';
+import {setSelectedCountry} from '@actions/CountrySelectioAction';
+import {getApi} from '@api/commonApi';
 
 
-const CountrySelectionInput = () => {
+const CountrySelectionInput = ({handalFun,keyName}) => {
   const [isVisible,setIsVisible]=useState(false);
-
   const languageModalToggel = useCallback(() => {
     setIsVisible(!isVisible);
   });
+  const selectedCountry =  useSelector(state => state.selectedCountry);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if(!selectedCountry){
+      getApi("https://restcountries.com/v2/alpha/IN?fields=name,flags,callingCodes,alpha2Code")
+      .then((res) => {
+        dispatch(setSelectedCountry(res.data));
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  },[]);
   
   return (
     <View style={style.inputWarpper}>
@@ -17,13 +31,15 @@ const CountrySelectionInput = () => {
       <View style={style.inputGroup}>
         <TouchableOpacity style={style.input}  onPress={ () => languageModalToggel() }>
           <Image
-            source={{ uri: "https://flagsapi.com/BE/flat/64.png" }}
+            source={{ uri: selectedCountry?.flags?.png }}
             resizeMode="contain"
             style={style.image}
           />
           <Icon style={style.icon} name={'chevron-down'} size={15} color={'#333'} />
         </TouchableOpacity>
-        <TextInput style={style.inputPhone} />
+        <TextInput 
+        style={style.inputPhone}
+        onChangeText={(text) => handalFun(text,keyName)} />
       </View>
       <SelectCountryModal
       isVisible={isVisible}

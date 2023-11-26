@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet,ScrollView,Image, Text, View, SafeAreaView, TextInput, KeyboardAvoidingView,TouchableOpacity } from 'react-native';
-import {useState, useRef } from 'react';
+import {useState, useRef,useEffect} from 'react';
 //helpers
 import { DIMENSION,COLORS} from '@constants/Helper';
 
@@ -8,6 +8,7 @@ import { DIMENSION,COLORS} from '@constants/Helper';
 import Input from '@components/form/Input';
 import CountrySelectionInput from '@components/form/CountrySelectionInput';
 import ButtonCustome from '@components/assert/ButtonCustome';
+import {useSelector} from 'react-redux';
 
 
 const LoginScreen = () => {
@@ -15,17 +16,26 @@ const LoginScreen = () => {
   const passwordIconEvent = () => {
     setShowPassword(!showPassword);
   }
-  
+  const selectedCountry =  useSelector(state => state.selectedCountry);
   const [loginData,setloginData] = useState({
-    fullname : "",
-    phone    : "",
-    email    : "",
-    age      : "",
-    gender   :"male"
+    fullname  : "",
+    phone     : "",
+    email     : "",
+    age       : "",
+    gender    :"male",
+    countryCode:'+91'
   });
   
-  const handleOnChange = (key, value) => {
-    setloginData({ ...loginData, [value]:key  });
+  useEffect(()=> {
+    handleCountryCode();
+  },[selectedCountry])
+  
+  const handleCountryCode = () => {
+      setloginData({ ...loginData, countryCode:selectedCountry?.callingCodes[0]  });
+  };
+  
+  const handleOnChange = (value,key) => {
+      setloginData({ ...loginData, [key]:value  });
   };
   
   const handlSubmit = () => {

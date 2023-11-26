@@ -1,27 +1,31 @@
 import React, { useState,useEffect} from 'react';
 import {Modal,View,Text,TouchableOpacity,StyleSheet,Image,SafeAreaView,ScrollView,FlatList,TextInput} from 'react-native';
 import CountryItem from '@components/form/CountryItem';
+
+import {useDispatch,useSelector} from 'react-redux';
+import {setSelectedCountry} from '@actions/CountrySelectioAction';
 import {getApi} from '@api/commonApi';
 
-    
 
-const SelectCountryModal = ({isVisible,languageModalToggel}) => {
- const [searchCountryData,setSearchCountryData] = useState();
- const [countryData,setCountryData] = useState();
- const [searchKey,setSearchKey] = useState();
- 
- useEffect(() => {
-   
-   getApi("https://restcountries.com/v2/all?fields=name,flags,callingCodes")
-    .then((res) => {
-       setCountryData(res.data);
-       setSearchCountryData(res.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
- },[]);
+const SelectCountryModal =({isVisible,languageModalToggel}) => {
   
+ const [searchCountryData,setSearchCountryData] = useState();
+ const [countryData,setCountryData] = useState(null);
+ const [searchKey,setSearchKey] = useState();
+ const dispatch = useDispatch();
+ 
+
+ useEffect(() => {
+    getApi("https://restcountries.com/v2/all?fields=name,flags,callingCodes,alpha2Code")
+      .then((res) => {
+        setSearchCountryData(res.data);
+        setCountryData(res.data);
+      }).catch((error) => {
+        console.log(error);
+      });
+ },[]);
+   
+   
  const searchCountry = (search = "") => {
    if(search){
      let filterData = countryData.filter((item) => {
@@ -64,9 +68,8 @@ const SelectCountryModal = ({isVisible,languageModalToggel}) => {
           windowSize={10}
           renderItem={({item}) => 
           <CountryItem 
-          item={item}
-          languageModalToggel={languageModalToggel} 
-          />}
+          item={item} 
+          languageModalToggel={languageModalToggel}  />}
           keyExtractor={(_, index) => `list_item${index}`}
           />
           </SafeAreaView>

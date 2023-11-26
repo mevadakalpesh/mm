@@ -17,6 +17,7 @@ const Input = ({
       <View style={style.inputGroup}>
          <TextInput 
          keyboardType={keyboardType}
+         onChangeText={(text)=> handalFun(text,keyName)}
          style={[style.input, icon ? { 
          borderTopRightRadius: 0, 
          borderBottomRightRadius: 0

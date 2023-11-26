@@ -1,18 +1,29 @@
-import React, { memo } from 'react';
+import React, { memo,useState,useEffect} from 'react';
 import {View,Text,TouchableOpacity,StyleSheet,Image} from 'react-native';
 
+import {useDispatch,useSelector} from 'react-redux';
+import {setSelectedCountry} from '@actions/CountrySelectioAction';
+
 const CountryItem = memo(({item,languageModalToggel}) => {
+   
+    const selectCountry = useSelector(state => state.selectedCountry);
+    const dispatch = useDispatch();
+    const handleLanguagePressEvent = (county) => {
+      languageModalToggel();
+      dispatch(setSelectedCountry(county));
+    }
+    
     return (
        <TouchableOpacity 
             underlayColor="dark"
             activeOpacity={0.7}
-            onPress={() => languageModalToggel(item)}
-            style={item.alpha2Code === "IN" ? { 
+            onPress={() => handleLanguagePressEvent(item)}
+            style={item.alpha2Code === selectCountry?.alpha2Code ? { 
                   backgroundColor: '#2EACF2',
                   borderRadius: 10,
-                  borderWidth: 2,
-                  borderColor: '#fff', // Choose a color that contrasts with the background
-                  elevation: 5, // Adjust elevation for a lifted effect
+                  borderWidth: 1,
+                  borderColor: '#fff', 
+                  elevation: 2,
                 } : {}}
             >
             <View style={styles.languageItem}>
@@ -21,8 +32,10 @@ const CountryItem = memo(({item,languageModalToggel}) => {
                 resizeMode="contain"
                 style={styles.image}
               />
-              <Text style={styles.text}>{item.name}</Text>
-              <Text style={styles.text}>+{item?.callingCodes[0]}</Text>
+              <Text style={[styles.text,item.alpha2Code ===
+              selectCountry?.alpha2Code ? {color:'#2EACF2'} : {}]}>{item.name}</Text>
+              <Text style={[styles.text,item.alpha2Code ===
+              selectCountry?.alpha2Code ? {color:'#2EACF2'} : {}]}>+{item?.callingCodes[0]}</Text>
             </View>
             </TouchableOpacity>
     )

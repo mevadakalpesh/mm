@@ -1,7 +1,7 @@
 import {Text,View,TouchableOpacity,StyleSheet} from 'react-native';
 import { COLORS,DIMENSION} from '@constants/Helper';
 
-const ButtonCustome = ({lable}) => {
+const ButtonCustome = ({lable,handalFun}) => {
   return (
     <TouchableOpacity style={styles.button} onPress={() => handalFun()}>
         <Text style={styles.buttonLabal}>{lable}</Text>
