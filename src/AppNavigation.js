@@ -6,13 +6,15 @@ import {getItem} from '@constants/Storage';
 import OnBordingScreen from '@screens/OnBordingScreen';
 import DashboardScreen from '@screens/DashboardScreen';
 import LoginScreen from '@screens/LoginScreen';
+import SelectLanguageScreen from '@screens/SelectLanguageScreen';
+import SelectCategory from '@screens/SelectCategory';
 
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
   const  onBordingProcessDone = getItem('onBordingProcessDone');
-  let initialRouteName = 'LoginScreen';
+  let initialRouteName = 'SelectCategory';
   
   // if(onBordingProcessDone != 'Yes'){
   //   initialRouteName = 'OnBordingScreen';
@@ -28,6 +30,9 @@ const AppNavigation = () => {
           <Stack.Screen name="OnBordingScreen" component={OnBordingScreen} />
           <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="SelectLanguageScreen" component={SelectLanguageScreen} />
+          <Stack.Screen name="SelectCategory" component={SelectCategory} />
+          
        </Stack.Navigator>
     </NavigationContainer>
   )

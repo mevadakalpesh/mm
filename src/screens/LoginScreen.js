@@ -28,7 +28,7 @@ const LoginScreen = () => {
   
   useEffect(()=> {
     handleCountryCode();
-  },[selectedCountry])
+  },[selectedCountry]);
   
   const handleCountryCode = () => {
       setloginData({ ...loginData, countryCode:selectedCountry?.callingCodes[0]  });
