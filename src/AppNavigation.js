@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
   const  onBordingProcessDone = getItem('onBordingProcessDone');
-  let initialRouteName = 'SelectCategory';
+  let initialRouteName = 'SelectLanguageScreen';
   
   // if(onBordingProcessDone != 'Yes'){
   //   initialRouteName = 'OnBordingScreen';

@@ -20,7 +20,7 @@ const OnBordingPagination = ({slidIndex,OnBordingData,changeNextSlider}) => {
   const handelButtonPress = (slidIndex) => {
     if(OnBordingData.length - 1 == slidIndex){
       setItem('onBordingProcessDone','Yes');
-      navigation.navigate('DashboardScreen');
+      navigation.navigate('LoginScreen');
     }else {
       changeNextSlider(slidIndex);
     }

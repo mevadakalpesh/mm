@@ -4,15 +4,15 @@ import {COLORS} from '@constants/Helper.js'
 import LanguageItem from '@components/language/LanguageItem';
 import ButtonCustome from '@components/assert/ButtonCustome';
 import {useState,useCallback} from 'react';
-
+import { useNavigation } from '@react-navigation/native';
 const SelectLanguageScreen = () => {
   const [selectedLanguage,setSelectedLanguage] = useState('GU');
-  
+  const navigation = useNavigation();
   const changeLangauge = useCallback((language) => {
     setSelectedLanguage(language);
   });
   const handlSubmit = () => {
-    
+    navigation.navigate('OnBordingScreen');
   }
   return (
     <SafeAreaView style={styles.languageWrapper}>

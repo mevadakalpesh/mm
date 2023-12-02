@@ -9,9 +9,11 @@ import Input from '@components/form/Input';
 import CountrySelectionInput from '@components/form/CountrySelectionInput';
 import ButtonCustome from '@components/assert/ButtonCustome';
 import {useSelector} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
   const [showPassword,setShowPassword] = useState(true);
   const passwordIconEvent = () => {
     setShowPassword(!showPassword);
@@ -39,8 +41,9 @@ const LoginScreen = () => {
   };
   
   const handlSubmit = () => {
-    console.log(JSON.stringify(loginData));
-    alert(JSON.stringify(loginData));
+    navigation.navigate('SelectCategory');
+    // console.log(JSON.stringify(loginData));
+    // alert(JSON.stringify(loginData));
   }
   
   return (
